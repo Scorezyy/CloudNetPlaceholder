@@ -12,7 +12,7 @@
   <name>CloudNetPlaceholder</name>
 
   <properties>
-    <java.version>23</java.version>
+    <java.version>17</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -62,6 +62,10 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
+        <repository>
+            <id>cloudnet-releases</id>
+            <url>https://repo.cloudnetservice.eu/repository/releases/</url>
+        </repository>
     </repositories>
     <dependencies>
         <dependency>
@@ -71,19 +75,22 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>eu.cloudnetservice.cloudnet</groupId>
-            <artifactId>bridge</artifactId>
-            <version>4.0.0-RC11.2</version>
+            <groupId>de.dytanic.cloudnet</groupId>
+            <artifactId>cloudnet-bridge</artifactId>
+            <version>3.4.0-RELEASE</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>eu.cloudnetservice.cloudnet</groupId>
-            <artifactId>driver</artifactId>
-            <version>4.0.0-RC11.2</version>
+            <groupId>de.dytanic.cloudnet</groupId>
+            <artifactId>cloudnet-driver</artifactId>
+            <version>3.4.0-RELEASE</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>eu.cloudnetservice.cloudnet</groupId>
-            <artifactId>wrapper-jvm</artifactId>
-            <version>4.0.0-RC11.2</version>
+            <groupId>de.dytanic.cloudnet</groupId>
+            <artifactId>cloudnet-wrapper-jvm</artifactId>
+            <version>3.4.0-RELEASE</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.github.PlaceholderAPI</groupId>
