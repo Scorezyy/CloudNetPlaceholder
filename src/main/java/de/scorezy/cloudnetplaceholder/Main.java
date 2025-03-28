@@ -1,8 +1,12 @@
 package de.scorezy.cloudnetplaceholder;
 
-import de.dytanic.cloudnet.driver.service.ServiceId;
-import de.dytanic.cloudnet.ext.bridge.BridgePlayerManager;
-import de.dytanic.cloudnet.wrapper.Wrapper;
+import eu.cloudnetservice.driver.inject.InjectionLayer;
+import eu.cloudnetservice.driver.registry.ServiceRegistry;
+import eu.cloudnetservice.driver.service.ServiceId;
+import eu.cloudnetservice.driver.service.ServiceInfoSnapshot;
+import eu.cloudnetservice.modules.bridge.BridgeServiceHelper;
+import eu.cloudnetservice.modules.bridge.player.PlayerManager;
+import eu.cloudnetservice.wrapper.configuration.WrapperConfiguration;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -47,21 +51,20 @@ public class Main extends JavaPlugin {
 
         @Override
         public String onPlaceholderRequest(Player player, String identifier) {
-
             if (identifier.equals("servername")) {
-                ServiceId serviceId = Wrapper.getInstance().getServiceId();
-                if (serviceId != null) {
-                    String taskName = serviceId.getTaskName();
-                    int serviceNumber = serviceId.getTaskServiceId();
+                ServiceId serviceId = InjectionLayer.ext().instance(WrapperConfiguration.class)
+                    .serviceInfoSnapshot().serviceId();
+              String taskName = serviceId.taskName();
+              int serviceNumber = serviceId.taskServiceId();
 
-                    return taskName + "-" + serviceNumber;
-                }
-                return "Unknown";
+              return taskName + "-" + serviceNumber;
             }
 
 
             if (identifier.equals("playercount")) {
-                int onlinePlayerCount = BridgePlayerManager.getInstance().getOnlineCount();
+                ServiceRegistry serviceRegistry = InjectionLayer.ext().instance(ServiceRegistry.class);
+                PlayerManager playerManager = serviceRegistry.firstProvider(PlayerManager.class);
+                int onlinePlayerCount = playerManager.onlineCount();
                 return String.valueOf(onlinePlayerCount);
             }
 
