@@ -1,0 +1,4 @@
+name: CloudNetPlaceholder
+version: '${project.version}'
+main: de.scorezy.cloudnetplaceholder.Main
+api-version: '1.19'
